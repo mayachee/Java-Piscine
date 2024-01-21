@@ -45,13 +45,14 @@ public class Program {
 
                     // Display the character
                     System.out.print(ch + " ");
-
+                    
                     // Display the histogram
                     for (int i = 0; i < frequency; i++) {
-                        System.out.print("# ");
+                        System.out.print("#");
+                        
                     }
-
                     System.out.println();
+                    
                 });
     }
 }

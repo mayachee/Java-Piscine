@@ -11,7 +11,7 @@ public class Program {
         String[] students = readStudentNames(scanner);
 
         // Create a timetable
-        System.out.println("Enter the timetable (format: class_time DAY):");
+        System.out.println("Enter the timetable (format: class_time DAY) For example : 4 WE :");
         String[][] timetable = readTimetable(scanner);
 
         // Record attendance
@@ -90,9 +90,11 @@ public class Program {
 
                 if (studentIndex != -1 && classIndex != -1) {
                     timetable[classIndex][studentIndex + 2] = status;
-                } else {
-                    System.out.println("Invalid student or class information.");
-                }
+                } 
+                // else {
+                //     System.out.println("Invalid student or class information.");
+                // }
+
             } else {
                 System.out.println("Invalid input. Please use the format: student class_time day status");
             }
@@ -118,7 +120,8 @@ public class Program {
         return -1;
     }
 
-    private static void displayTimetableWithAttendance(String[] students, String[][] timetable) {
+    private static void displayTimetableWithAttendance(String[] students, String[][] timetable)
+    {
         System.out.println();
 
         // Display timetable header

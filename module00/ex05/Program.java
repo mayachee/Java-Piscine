@@ -122,8 +122,7 @@ public class Program {
 
     private static void displayTimetableWithAttendance(String[] students, String[][] timetable)
     {
-        System.out.println();
-
+        System.out.print("       ");
         // Display timetable header
         for (int i = 0; i < timetable.length; i++) {
             if (timetable[i][0] != null && timetable[i][1] != null) {
@@ -137,12 +136,13 @@ public class Program {
             if (students[studentIndex] != null) {
                 System.out.printf("%-10s", students[studentIndex]);
 
-                for (int classIndex = 0; classIndex < timetable.length; classIndex++) {
-                    if (timetable[classIndex][0] != null && timetable[classIndex][1] != null) {
-                        String status = timetable[classIndex][studentIndex + 2];
-                        System.out.printf("| %-4s", status != null ? status : "");
-                    }
-                }
+                // for (int classIndex = 0; classIndex < timetable.length; classIndex++) {
+
+                    // if (timetable[classIndex][0] != null && timetable[classIndex][1] != null) {
+                        // String status = timetable[classIndex][studentIndex + 2];
+                        // System.out.printf("| %-4s", status != null ? status : "");
+                    // }
+                // }
 
                 System.out.println();
             }

@@ -1,4 +1,4 @@
-package module00.ex00;
+package Java_Day_00.ex00;
 
 import java.util.Scanner;
 

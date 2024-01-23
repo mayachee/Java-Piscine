@@ -26,5 +26,7 @@ public class Program {
         System.out.println("\nUpdated Balances:");
         System.out.println("User 1: " + user1.getName() + ", Balance: $" + user1.getBalance());
         System.out.println("User 2: " + user2.getName() + ", Balance: $" + user2.getBalance());
+
+        System.out.println("\nEnd of Program");
     }
 }

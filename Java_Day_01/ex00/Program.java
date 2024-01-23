@@ -5,10 +5,12 @@ public class Program {
         // Create users
         User user1 = new User(1, "John", 1000.0);
         User user2 = new User(2, "Alice", 1500.0);
+        User user3 = new User(3, "YASSINE", 500.0);
 
         // Display user information
         System.out.println("User 1: " + user1.getName() + ", Balance: $" + user1.getBalance());
         System.out.println("User 2: " + user2.getName() + ", Balance: $" + user2.getBalance());
+        System.out.println("User 3: " + user3.getName() + ", Balance: $" + user3.getBalance());
 
         // Create and display a transaction
         Transaction transaction = new Transaction(user2, user1, "debits", 500.0);
@@ -18,14 +20,36 @@ public class Program {
         System.out.println("Transfer Category: " + transaction.getTransferCategory());
         System.out.println("Transfer Amount: $" + transaction.getTransferAmount());
 
+        
         // Update user balances after the transaction
         user1.setBalance(user1.getBalance() - transaction.getTransferAmount());
         user2.setBalance(user2.getBalance() + transaction.getTransferAmount());
-
+    
         // Display updated user balances
         System.out.println("\nUpdated Balances:");
         System.out.println("User 1: " + user1.getName() + ", Balance: $" + user1.getBalance());
         System.out.println("User 2: " + user2.getName() + ", Balance: $" + user2.getBalance());
+
+        
+        // Create and display a transaction
+        Transaction transaction1 = new Transaction(user3, user1, "test n yassine", 500.0);
+        System.out.println("\nTransaction ID: " + transaction1.getIdentifier());
+        System.out.println("Sender: " + transaction1.getSender().getName());
+        System.out.println("Recipient: " + transaction1.getRecipient().getName());
+        System.out.println("Transfer Category: " + transaction1.getTransferCategory());
+        System.out.println("Transfer Amount: $" + transaction1.getTransferAmount());
+
+         // Update user balances after the second transaction
+        user1.setBalance(user1.getBalance() - transaction1.getTransferAmount());
+        // user2.setBalance(user2.getBalance() + transaction.getTransferAmount());
+        user3.setBalance(user3.getBalance() + transaction1.getTransferAmount());
+        // Display updated user balances
+        System.out.println("\nUpdated Balances:");
+        System.out.println("User 1: " + user1.getName() + ", Balance: $" + user1.getBalance());
+        System.out.println("User 2: " + user2.getName() + ", Balance: $" + user2.getBalance());
+        System.out.println("User 3: " + user3.getName() + ", Balance: $" + user3.getBalance());
+
+
 
         System.out.println("\nEnd of Program");
     }

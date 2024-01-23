@@ -85,15 +85,25 @@ public class Program {
                 String day = tokens[2];
                 String status = tokens[3];
 
+                // System.out.println("--> studentName" + studentName);
+                // System.out.println("--> classTime" + classTime);
+                // System.out.println("--> day" + day);
+                // System.out.println("--> status" + status);
+
                 int studentIndex = findStudentIndex(students, studentName);
                 int classIndex = findClassIndex(timetable, classTime, day);
+
+                // System.out.println("--> studentIndex" + studentIndex);
+                // System.out.println("--> findStudentIndex" + findStudentIndex(students, studentName));
+                // System.out.println("--> classIndex" + classIndex);
+                // System.out.println("--> findClassIndex" + findClassIndex(timetable, classTime, day));
 
                 if (studentIndex != -1 && classIndex != -1) {
                     timetable[classIndex][studentIndex + 2] = status;
                 } 
-                // else {
-                //     System.out.println("Invalid student or class information.");
-                // }
+                else {
+                    System.out.println("Invalid student or class information.");
+                }
 
             } else {
                 System.out.println("Invalid input. Please use the format: student class_time day status");
@@ -103,7 +113,9 @@ public class Program {
 
     private static int findStudentIndex(String[] students, String studentName) {
         for (int i = 0; i < students.length; i++) {
-            if (students[i] != null && students[i].equals(studentName)) {
+            if (students[i] != null 
+            // && students[i].equals(studentName)
+            ) {
                 return i;
             }
         }

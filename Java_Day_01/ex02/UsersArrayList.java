@@ -1,8 +1,9 @@
 package Java_Day_01.ex02;
 
-import java.util.Arrays;
 
 // UsersArrayList.java
+import java.util.Arrays;
+
 public class UsersArrayList implements UsersList {
     private static final int DEFAULT_CAPACITY = 10;
     private User[] users;
@@ -13,34 +14,30 @@ public class UsersArrayList implements UsersList {
         this.size = 0;
     }
 
-    private void ensureCapacity() {
-        if (size == users.length) {
-            users = Arrays.copyOf(users, users.length + (users.length / 2));
-        }
-    }
-
     @Override
     public void addUser(User user) {
-        ensureCapacity();
+        if (size == users.length) {
+            users = Arrays.copyOf(users, users.length * 3 / 2); // Increase array size by half
+        }
         users[size++] = user;
     }
 
     @Override
-    public User getUserById(int userId) throws UserNotFoundException {
+    public User getUserById(int userId) {
         for (User user : users) {
-            if (user != null && user.getId() == userId) {
+            if (user != null && user.getIdentifier() == userId) {
                 return user;
             }
         }
-        throw new UserNotFoundException("User with ID " + userId + " not found");
+        throw new UserNotFoundException("User not found with ID: " + userId);
     }
 
     @Override
-    public User getUserByIndex(int index) throws UserNotFoundException {
+    public User getUserByIndex(int index) {
         if (index >= 0 && index < size) {
             return users[index];
         }
-        throw new UserNotFoundException("User at index " + index + " not found");
+        throw new UserNotFoundException("User not found at index: " + index);
     }
 
     @Override

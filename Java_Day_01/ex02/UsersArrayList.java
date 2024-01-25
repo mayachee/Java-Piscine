@@ -3,6 +3,7 @@ package Java_Day_01.ex02;
 
 // UsersArrayList.java
 import java.util.Arrays;
+import java.util.UUID;
 
 public class UsersArrayList implements UsersList {
     private static final int DEFAULT_CAPACITY = 10;
@@ -23,9 +24,9 @@ public class UsersArrayList implements UsersList {
     }
 
     @Override
-    public User getUserById(int userId) {
+    public User getUserById(UUID userId) {
         for (User user : users) {
-            if (user != null && user.getIdentifier() == userId) {
+            if (user != null && user.getIdentifier()== userId) {
                 return user;
             }
         }

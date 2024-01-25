@@ -4,6 +4,7 @@ package Java_Day_01.ex04;
 import java.util.ArrayList;
 // import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 // TransactionsService.java
 public class TransactionsService {
@@ -17,12 +18,12 @@ public class TransactionsService {
         usersList.addUser(user);
     }
 
-    public double getUserBalance(int userId) {
+    public double getUserBalance(UUID userId) {
         User user = usersList.getUserById(userId);
         return user.getBalance();
     }
 
-    public void performTransfer(int senderId, int recipientId, double transferAmount) {
+    public void performTransfer(UUID senderId, UUID recipientId, double transferAmount) {
         User sender = usersList.getUserById(senderId);
         User recipient = usersList.getUserById(recipientId);
 
@@ -37,12 +38,12 @@ public class TransactionsService {
         sender.getTransactionsList().addTransaction(creditTransaction);
     }
 
-    public Transaction[] getUserTransfers(int userId) {
+    public Transaction[] getUserTransfers(UUID userId) {
         User user = usersList.getUserById(userId);
         return user.getTransactionsList().toArray();
     }
 
-    public void removeTransactionByIdForUser(int userId, String transactionId) {
+    public void removeTransactionByIdForUser(UUID userId, String transactionId) {
         User user = usersList.getUserById(userId);
         user.getTransactionsList().removeTransactionById(transactionId);
     }

@@ -12,7 +12,7 @@ public class User {
         this.balance = balance;
     }
 
-    // Getters and setters
+    // Getters and  
     public int getIdentifier() {
         return identifier;
     }

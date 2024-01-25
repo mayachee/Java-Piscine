@@ -1,19 +1,28 @@
-package Java_Day_01.ex00;
-// import java.util.UUID;
+package Java_Day_01.ex04;
+
+import java.util.UUID;
 
 public class User {
-    private int identifier;
+
+    private UUID identifier;
     private String name;
     private double balance;
+    private TransactionsList transactionsList;
 
     public User(int identifier, String name, double balance) {
-        this.identifier = identifier;
+        this.identifier = UUID.randomUUID();
         this.name = name;
         this.balance = balance;
+        this.transactionsList = new TransactionsLinkedList();
+    }
+    // ... (previous methods)
+
+    public TransactionsList getTransactionsList() {
+        return transactionsList;
     }
 
-    // Getters and  
-    public int getIdentifier() {
+    // Getters
+    public UUID getIdentifier() {
         return identifier;
     }
 

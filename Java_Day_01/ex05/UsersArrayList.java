@@ -1,7 +1,6 @@
-package Java_Day_01.ex02;
+package Java_Day_01.ex05;
 
-
-// UsersArrayList.java
+// UsersArrayList.java (updated)
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -26,7 +25,7 @@ public class UsersArrayList implements UsersList {
     @Override
     public User getUserById(UUID userId) {
         for (User user : users) {
-            if (user != null && user.getIdentifier()== userId) {
+            if (user != null && user.getIdentifier() == userId) {
                 return user;
             }
         }
@@ -34,15 +33,7 @@ public class UsersArrayList implements UsersList {
     }
 
     @Override
-    public User getUserByIndex(int index) {
-        if (index >= 0 && index < size) {
-            return users[index];
-        }
-        throw new UserNotFoundException("User not found at index: " + index);
-    }
-
-    @Override
-    public int getNumberOfUsers() {
-        return size;
+    public User[] toArray() {
+        return Arrays.copyOf(users, size);
     }
 }

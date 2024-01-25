@@ -3,12 +3,14 @@ package Java_Day_01.ex05;
 import java.util.Scanner;
 import java.util.UUID;
 
-import javax.xml.crypto.dsig.TransformService;
+// import javax.xml.crypto.dsig.TransformService;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 // Menu.java
 public class Menu {
+    private int id = 0;
+
     private TransactionsService transactionsService;
     private boolean devMode;
 
@@ -69,12 +71,11 @@ public class Menu {
         System.out.print("Enter a user name and a balance -> ");
         String name = scanner.next();
         double balance = scanner.nextDouble();
-        int id = 0;
 
         User user = new User(UUID.randomUUID(), id, name, balance);
         transactionsService.addUser(user);
-        transactionsService.addUser(user);
-        System.out.println("User with id = " + id + " is added ---------------------------------------------------------");
+        System.out.println("User with id = " + user.getId() + " is added ---------------------------------------------------------");
+        id++;
     }
 
     private void viewUserBalances(Scanner scanner) {

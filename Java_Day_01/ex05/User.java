@@ -11,7 +11,7 @@ public class User {
     private TransactionsList transactionsList;
 
     public User(UUID identifier,int id, String name, double balance) {
-        this.id = id++;
+        this.id = id;
         this.identifier = identifier;
         this.name = name;
         this.balance = balance;

@@ -1,4 +1,4 @@
-package Java_Day_01.ex04;
+package Java_Day_01.ex05;
 
 // UsersArrayList.java (updated)
 import java.util.Arrays;
@@ -16,7 +16,6 @@ public class UsersArrayList implements UsersList {
 
     @Override
     public void addUser(User user) {
-
         if (size == users.length) {
             users = Arrays.copyOf(users, users.length * 3 / 2); // Increase array size by half
         }

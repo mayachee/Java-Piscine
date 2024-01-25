@@ -12,3 +12,7 @@
   - Public Interface
   - Decoupling & Abstraction
   - Multiple Inheritances
+
+### Difference between Abstract Class and Interface
+
+<img src="https://miro.medium.com/v2/resize:fit:1120/1*3yvsRyo7c_0-cpP3nPFgwg.png">

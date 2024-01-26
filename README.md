@@ -1,1 +1,1 @@
-# java-module
+# Java Piscine

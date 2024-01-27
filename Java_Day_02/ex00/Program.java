@@ -91,47 +91,20 @@ public class Program {
         }
     }
 
-    private static String detectFileType(String filePath)
-    {
+        private static String detectFileType(String filePath) {
         try {
             Path path = Paths.get(filePath);
-            System.out.println("path: " + path);
             return Files.probeContentType(path);
         } catch (IOException e) {
             throw new RuntimeException("Could not determine file type.", e);
         }
     }
-    // private static String detectFileType(String filePath) {
-    //     try (FileInputStream fis = new FileInputStream(filePath)) {
-    //         byte[] headerBytes = new byte[8]; // Read the first 8 bytes
-    //         int bytesRead = fis.read(headerBytes);
 
-    //         if (bytesRead == 8) {
-    //             String headerHex = bytesToHex(headerBytes);
-    //             for (Map.Entry<String, List<String>> entry : signaturesMap.entrySet()) {
-    //                 List<String> signatures = entry.getValue();
-    //                 System.out.println("signatures: " + signatures);
-    //                 if (signatures.contains(headerHex)) {
-    //                     System.out.println("headerHex: " + headerHex);
-    //                     System.out.println("entry.getKey(): " + entry.getKey());
-    //                     return entry.getKey();
-    //                 }
-    //             }
-    //         }
-    //         fis.close();
-    //     } catch (IOException e) {
-    //         // Ignore or log the error, file cannot be processed
-    //         throw new RuntimeException(e);
-
+    // private static String bytesToHex(byte[] bytes) {
+    //     StringBuilder sb = new StringBuilder();
+    //     for (byte b : bytes) {
+    //         sb.append(String.format("%02X ", b));
     //     }
-    //     return null;
+    //     return sb.toString().trim();
     // }
-
-    private static String bytesToHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02X ", b));
-        }
-        return sb.toString().trim();
-    }
 }

@@ -1,6 +1,10 @@
 package Java_Day_02.ex00;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Program {
@@ -44,7 +48,9 @@ public class Program {
                     break;
                 } 
 
+                System.out.println("filePath: " + filePath);
                 String fileType = detectFileType(filePath);
+                writeToFile(resultFile, fileType);
                 if (fileType != null) {
                     writer.println(fileType);
                     System.out.println("PROCESSED");
@@ -54,6 +60,18 @@ public class Program {
             }
         } catch (FileNotFoundException e) {
             System.err.println("Error: result.txt file not found.");
+        }
+    }
+
+        private static void writeToFile(String filePath, String content) {
+        try {
+            Path path = Paths.get(filePath);
+            if (content == null) {
+                content = "Unknown file type";
+            }
+            Files.write(path, content.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            throw new RuntimeException("Could not write to file.", e);
         }
     }
 
@@ -73,25 +91,41 @@ public class Program {
         }
     }
 
-    private static String detectFileType(String filePath) {
-        try (FileInputStream fis = new FileInputStream(filePath)) {
-            byte[] headerBytes = new byte[8]; // Read the first 8 bytes
-            int bytesRead = fis.read(headerBytes);
-
-            if (bytesRead == 8) {
-                String headerHex = bytesToHex(headerBytes);
-                for (Map.Entry<String, List<String>> entry : signaturesMap.entrySet()) {
-                    List<String> signatures = entry.getValue();
-                    if (signatures.contains(headerHex)) {
-                        return entry.getKey();
-                    }
-                }
-            }
+    private static String detectFileType(String filePath)
+    {
+        try {
+            Path path = Paths.get(filePath);
+            System.out.println("path: " + path);
+            return Files.probeContentType(path);
         } catch (IOException e) {
-            // Ignore or log the error, file cannot be processed
+            throw new RuntimeException("Could not determine file type.", e);
         }
-        return null;
     }
+    // private static String detectFileType(String filePath) {
+    //     try (FileInputStream fis = new FileInputStream(filePath)) {
+    //         byte[] headerBytes = new byte[8]; // Read the first 8 bytes
+    //         int bytesRead = fis.read(headerBytes);
+
+    //         if (bytesRead == 8) {
+    //             String headerHex = bytesToHex(headerBytes);
+    //             for (Map.Entry<String, List<String>> entry : signaturesMap.entrySet()) {
+    //                 List<String> signatures = entry.getValue();
+    //                 System.out.println("signatures: " + signatures);
+    //                 if (signatures.contains(headerHex)) {
+    //                     System.out.println("headerHex: " + headerHex);
+    //                     System.out.println("entry.getKey(): " + entry.getKey());
+    //                     return entry.getKey();
+    //                 }
+    //             }
+    //         }
+    //         fis.close();
+    //     } catch (IOException e) {
+    //         // Ignore or log the error, file cannot be processed
+    //         throw new RuntimeException(e);
+
+    //     }
+    //     return null;
+    // }
 
     private static String bytesToHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();

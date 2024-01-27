@@ -2,15 +2,16 @@ package Java_Day_02.ex00;
 
 import java.io.*;
 import java.util.*;
-import java.io.IOException;
 
 public class Program {
+    private static Map<String, List<String>> signaturesMap = new HashMap<>();
+
     public static void main(String[] args) {
-        // Path to the signatures file
-        String signaturesFile = "C:\\Users\\Dima D'origine\\java-module\\Java_Day_02\\ex00\\signatures.txt";
-        // System.out.println("-->" + signaturesFile);
-
-
+        // loadSignatures("signatures.txt");
+        String currentDirectory = System.getProperty("user.dir");
+        // System.out.println("Current working directory: " + currentDirectory);
+        String signaturesFile = currentDirectory + File.separator + "Java_Day_02" + File.separator + "ex00" + File.separator + "signatures.txt";
+        // System.out.println("signaturesFile: " + signaturesFile);
         File file = new File(signaturesFile);
 
         if (!file.exists() || file.length() == 0) {
@@ -22,91 +23,81 @@ public class Program {
             return;
         }
         // Load signatures from the file into a map
-        Map<String, String> signatureMap = loadSignatures(signaturesFile);
+        loadSignatures(signaturesFile);
 
-        if (signatureMap.isEmpty()) {
+        if (signaturesFile.isEmpty()) {
             System.out.println("Error: Signatures file is empty or not found.");
             return;
         }
 
-        // Process files and write results to result.txt
-        try (Scanner scanner = new Scanner(System.in);
-             PrintWriter writer = new PrintWriter(new FileWriter("result.txt"))) {
+        Scanner scanner = new Scanner(System.in);
+        String resultFile = currentDirectory + File.separator + "Java_Day_02" + File.separator + "ex00" + File.separator + "result.txt";
+        System.out.println("resultFile: " + resultFile);
+        try (PrintWriter writer = new PrintWriter(resultFile)) {
 
             while (true) {
                 System.out.print("-> ");
                 String filePath = scanner.nextLine().trim();
-
-                // Exit the loop if user inputs an empty string
-                if (filePath.isEmpty()) {
-                    break;
-                }
-                if (filePath.equals("42")) {
+                if (filePath.equals("42"))
+                {
                     System.out.println("Goodbye!");
-                    return;
-                }
+                    break;
+                } 
 
-                // Process the file
-                String fileType = processFile(filePath, signatureMap);
-                writer.println(fileType);
+                String fileType = detectFileType(filePath);
+                if (fileType != null) {
+                    writer.println(fileType);
+                    System.out.println("PROCESSED");
+                } else {
+                    System.out.println("UNDEFINED");
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.err.println("Error: result.txt file not found.");
         }
     }
 
-    // Load signatures from the file into a map
-    private static Map<String, String> loadSignatures(String filename) {
-        Map<String, String> signatureMap = new HashMap<>();
-
+    private static void loadSignatures(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(", ");
+                String[] parts = line.split(",\\s*");
                 if (parts.length == 2) {
-                    signatureMap.put(parts[0], parts[1]);
+                    String fileType = parts[0];
+                    String[] signatures = parts[1].split("\\s+");
+                    signaturesMap.put(fileType, Arrays.asList(signatures));
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error reading signatures file: " + e.getMessage());
         }
-
-        return signatureMap;
     }
 
-    // Process the file and determine its type based on signatures
-    private static String processFile(String filePath, Map<String, String> signatureMap) {
-        File file = new File(filePath);
-
-        if (!file.exists() || !file.isFile()) {
-            return "INVALID";
-        }
-
-        try (FileInputStream fis = new FileInputStream(file)) {
-            byte[] headerBytes = new byte[8];
+    private static String detectFileType(String filePath) {
+        try (FileInputStream fis = new FileInputStream(filePath)) {
+            byte[] headerBytes = new byte[8]; // Read the first 8 bytes
             int bytesRead = fis.read(headerBytes);
 
             if (bytesRead == 8) {
-                String headerHex = bytesToHex(headerBytes).toUpperCase();
-                for (Map.Entry<String, String> entry : signatureMap.entrySet()) {
-                    if (headerHex.startsWith(entry.getValue().toUpperCase())) {
+                String headerHex = bytesToHex(headerBytes);
+                for (Map.Entry<String, List<String>> entry : signaturesMap.entrySet()) {
+                    List<String> signatures = entry.getValue();
+                    if (signatures.contains(headerHex)) {
                         return entry.getKey();
                     }
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            // Ignore or log the error, file cannot be processed
         }
-
-        return "UNDEFINED";
+        return null;
     }
 
-    // Convert byte array to hexadecimal string
     private static String bytesToHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
         for (byte b : bytes) {
-            sb.append(String.format("%02X", b));
+            sb.append(String.format("%02X ", b));
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 }

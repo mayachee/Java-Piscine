@@ -13,8 +13,9 @@ public class Program {
     public static void main(String[] args) {
         // loadSignatures("signatures.txt");
         String currentDirectory = System.getProperty("user.dir");
-        // System.out.println("Current working directory: " + currentDirectory);
-        String signaturesFile = currentDirectory + File.separator + "Java_Day_02" + File.separator + "ex00" + File.separator + "signatures.txt";
+        System.out.println("Current working directory: " + currentDirectory);
+        // String signaturesFile = currentDirectory + File.separator + "Java_Day_02" + File.separator + "ex00" + File.separator + "signatures.txt";
+        String signaturesFile = currentDirectory + File.separator + "signatures.txt";
         // System.out.println("signaturesFile: " + signaturesFile);
         File file = new File(signaturesFile);
 
@@ -35,7 +36,8 @@ public class Program {
         }
 
         Scanner scanner = new Scanner(System.in);
-        String resultFile = currentDirectory + File.separator + "Java_Day_02" + File.separator + "ex00" + File.separator + "result.txt";
+        // String resultFile = currentDirectory + File.separator + "Java_Day_02" + File.separator + "ex00" + File.separator + "result.txt";
+        String resultFile = currentDirectory + File.separator + "result.txt";
         System.out.println("resultFile: " + resultFile);
         try (PrintWriter writer = new PrintWriter(resultFile)) {
 

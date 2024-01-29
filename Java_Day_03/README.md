@@ -8,8 +8,7 @@ You can create a new thread simply by extending your class from Thread and overr
 
 The run() method contains the code that is executed inside the new thread. Once a thread is created, you can start it by calling the start() method.
 
-``java
-
+``` java
 public class ThreadExample extends Thread {
 
     // run() method contains the code that is executed by the thread.
@@ -28,17 +27,17 @@ public class ThreadExample extends Thread {
         thread.start();
     }
 }
-``
+```
 
 Output:
 
-``
+```
     # Output
     Inside : main
     Creating thread...
     Starting thread...
     Inside : Thread-0
-``
+```
 
 Thread.currentThread() returns a reference to the thread that is currently executing. In the above example, I’ve used thread’s getName() method to print the name of the current thread.
 
@@ -54,7 +53,7 @@ The Thread class itself implements Runnable with an empty implementation of run(
 
 For creating a new thread, create an instance of the class that implements Runnable interface and then pass that instance to Thread(Runnable target) constructor.
 
-``java
+```java
 
 public class RunnableExample implements Runnable {
 
@@ -77,24 +76,26 @@ public class RunnableExample implements Runnable {
     }
 }
 
-``
+```
 
 Output:
 
-``
+```
     # Output
     Inside : main
     Creating Runnable...
     Creating Thread...
     Starting Thread...
     Inside : Thread-0
-``
+```
 
 ## What is different between  implements Runnable and extends thread
 
 If you want to implements or extends any other class then Runnable interface is most preferable, otherwise, if you do not want any other class to extend or implement then Thread class is preferable.
 
 ### The most common difference is
+
+![vLRdp](https://github.com/siiine-764/Java-Piscine/assets/80540449/3d21e586-b6a2-4972-88ad-2189401cdadb)
 
 When you extends Thread class, after that you can’t extend any other class which you required. (As you know, Java does not allow inheriting more than one class).
 

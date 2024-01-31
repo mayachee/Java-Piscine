@@ -12,47 +12,27 @@ public class Program {
         }
 
         // Using Runnable
-        Runnable eggRunnable = new EggRunnable(count);
+        Runnable eggRunnable = new Egg(count);
         Thread eggThread = new Thread(eggRunnable);
-        eggThread.start();
+        try {
+            eggThread.start();
+            eggThread.join(count * 10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // Using Thread
-        HenThread henThread = new HenThread(count);
-        henThread.start();
+        Hen henThread = new Hen(count);
+        try {
+            henThread.start();
+            henThread.join(count * 10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // Main thread's messages
         for (int i = 0; i < count; i++) {
             System.out.println("Human");
-        }
-    }
-}
-
-class EggRunnable implements Runnable {
-    private int count;
-
-    public EggRunnable(int count) {
-        this.count = count;
-    }
-
-    @Override
-    public void run() {
-        for (int i = 0; i < count; i++) {
-            System.out.println("Egg");
-        }
-    }
-}
-
-class HenThread extends Thread {
-    private int count;
-
-    public HenThread(int count) {
-        this.count = count;
-    }
-
-    @Override
-    public void run() {
-        for (int i = 0; i < count; i++) {
-            System.out.println("Hen");
         }
     }
 }

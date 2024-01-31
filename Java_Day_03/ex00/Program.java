@@ -1,8 +1,33 @@
 package Java_Day_03.ex00;
 
+import java.util.Scanner;
+
 public class Program {
     public static void main(String[] args) {
-        int count = 50; // Default count
+
+        // if(args.length != 1){
+        //     System.err.println("Error: wrong args length");
+        //     System.exit(-1);
+        // }
+        Scanner scanner = new Scanner(System.in);
+
+        String[] input = scanner.nextLine().split("=");
+        if(!input[0].equals("--count")){
+            System.err.println("Error: wrong flag");
+            System.exit(-1);
+        }
+        if (!input[1].matches("[0-9]")) {
+            System.err.println("Error: wrong count");
+            System.exit(-1);
+        }
+        int count = Integer.parseInt(input[1]);
+        
+        if (count < 0 || count > 9) {
+            System.err.println("Error: wrong count");
+            System.exit(-1);
+        }
+
+        // int count = 50; // Default count
         if (args.length > 0) {
             for (String arg : args) {
                 if (arg.startsWith("--count=")) {
@@ -16,7 +41,7 @@ public class Program {
         Thread eggThread = new Thread(eggRunnable);
         try {
             eggThread.start();
-            eggThread.join(count * 10);
+            eggThread.join(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -25,7 +50,7 @@ public class Program {
         Hen henThread = new Hen(count);
         try {
             henThread.start();
-            henThread.join(count * 10);
+            henThread.join(1000000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

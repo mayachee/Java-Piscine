@@ -100,3 +100,12 @@ If you want to implements or extends any other class then Runnable interface is 
 When you extends Thread class, after that you can’t extend any other class which you required. (As you know, Java does not allow inheriting more than one class).
 
 When you implements Runnable, you can save space for your class to extend any other class in the future or now.
+
+## different between wait and notify
+
+Object.wait() to suspend a thread
+
+Object.notify() to wake a thread up
+
+
+<img src="https://www.baeldung.com/wp-content/uploads/2018/02/Java_-_Wait_and_Notify.png" />

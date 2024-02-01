@@ -24,6 +24,8 @@ public class Program {
         int count = Integer.parseInt(input[1]);
         
 
+        
+        
         // int count = 50; // Default count
         if (args.length > 0) {
             for (String arg : args) {
@@ -32,29 +34,10 @@ public class Program {
                 }
             }
         }
-
-        // Using Runnable
-        Runnable eggRunnable = new Egg(count);
-        Thread eggThread = new Thread(eggRunnable);
-        try {
-            eggThread.start();
-            eggThread.join(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Using Thread
-        Hen henThread = new Hen(count);
-        try {
-            henThread.start();
-            henThread.join(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Main thread's messages
-        for (int i = 0; i < count; i++) {
-            System.out.println("Human");
-        }
+        EggHenMonitor monitor = new EggHenMonitor();
+        Thread eggThread = new Thread(new Egg(monitor, count));
+        Thread henThread = new Thread(new Hen(monitor, count));
+        eggThread.start();
+        henThread.start();
     }
 }

@@ -1,16 +1,18 @@
 package Java_Day_03.ex01;
 
-public class Egg implements Runnable {
-    private int count;
+class Egg implements Runnable {
+    private final EggHenMonitor monitor;
+    private final int count;
 
-    public Egg(int count) {
+    public Egg(EggHenMonitor monitor, int count) {
+        this.monitor = monitor;
         this.count = count;
     }
 
     @Override
     public void run() {
         for (int i = 0; i < count; i++) {
-            System.out.println("Egg");
+            monitor.printEgg();
         }
     }
 }

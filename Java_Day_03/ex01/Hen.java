@@ -1,16 +1,18 @@
 package Java_Day_03.ex01;
 
-public class Hen extends Thread {
-    private int count;
+class Hen implements Runnable {
+    private final EggHenMonitor monitor;
+    private final int count;
 
-    public Hen(int count) {
+    public Hen(EggHenMonitor monitor, int count) {
+        this.monitor = monitor;
         this.count = count;
     }
 
     @Override
     public void run() {
         for (int i = 0; i < count; i++) {
-            System.out.println("Hen");
+            monitor.printHen();
         }
     }
 }

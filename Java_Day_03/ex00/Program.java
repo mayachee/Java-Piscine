@@ -5,10 +5,7 @@ import java.util.Scanner;
 public class Program {
     public static void main(String[] args) {
 
-        // if(args.length != 1){
-        //     System.err.println("Error: wrong args length");
-        //     System.exit(-1);
-        // }
+        // Check for the --count flag
         Scanner scanner = new Scanner(System.in);
 
         String[] input = scanner.nextLine().split("=");
@@ -16,16 +13,16 @@ public class Program {
             System.err.println("Error: wrong flag");
             System.exit(-1);
         }
-        if (!input[1].matches("[0-9]")) {
-            System.err.println("Error: wrong count");
-            System.exit(-1);
+        int j = 0;
+        while(!input[1].isEmpty() && j < input[1].length()){
+            if (input[1].charAt(j) < '0' || input[1].charAt(j) > '9') {
+                System.err.println("Error: wrong count");
+                System.exit(-1);
+            }
+            j++;
         }
         int count = Integer.parseInt(input[1]);
         
-        if (count < 0 || count > 9) {
-            System.err.println("Error: wrong count");
-            System.exit(-1);
-        }
 
         // int count = 50; // Default count
         if (args.length > 0) {

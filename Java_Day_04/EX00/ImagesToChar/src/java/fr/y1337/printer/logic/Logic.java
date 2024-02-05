@@ -1,24 +1,27 @@
-package fr.1337.printer.logic;
+package fr.y1337.printer.app.Logic;
 
-package fr.1337.printer.logic;
+// package fr.y1337.printer.logic;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import java.awt.*;
+
+
 public class Logic {
     public void printImage(String imagePath, char whiteChar, char blackChar) {
         try {
             BufferedImage image = ImageIO.read(new File(imagePath));
-            int width = image.getWidth();
-            int height = image.getHeight();
-
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                for (int x = 0; x < image.getWidth(); x++) {
                     int pixel = image.getRGB(x, y);
-                    char character = (pixel == -1) ? whiteChar : blackChar;
-                    System.out.print(character);
+                    if (pixel == -1) {
+                        System.out.print(whiteChar);
+                    } else {
+                        System.out.print(blackChar);
+                    }
                 }
                 System.out.println(); // Move to the next line after each row
             }

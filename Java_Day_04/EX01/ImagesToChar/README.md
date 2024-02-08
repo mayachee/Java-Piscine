@@ -25,7 +25,7 @@ The second argument is to enter a character to be used for black;
     * source files
         * java
             * files of Java source code
-                * fr.42.printer.*
+                * fr.y1337.printer.*
                 * ...
             * resources
                 * image.bmp
@@ -33,7 +33,7 @@ The second argument is to enter a character to be used for black;
             * manifest.txt (description of the initial point for archive startup)
     * target
         * compiled .class files and archive
-            * fr.42.printer.*
+            * fr.y1337.printer.*
             * resources
                 * images-to-chars-printer.jar
 

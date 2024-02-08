@@ -1,0 +1,1 @@
+Main-Class: fr.y1337.printer.app.Program

@@ -1,6 +1,0 @@
-
-### manifest.txt:
-
-```plaintext
-Main-Class: fr.42.printer.app.ImagePrinterApp
-Class-Path: .
